@@ -14,7 +14,10 @@ def jsonParser(data):
         json.dump(data, file, ensure_ascii=False, indent='\t')
 
 chrome_driver = os.path.join('chromedriver')
-chrome_options = webdriver.ChromeOptions()
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
 dr = webdriver.Chrome(chrome_driver, options=chrome_options)
 dr.get('https://mportal.cau.ac.kr/main.do')
 
