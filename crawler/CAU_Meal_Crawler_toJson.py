@@ -13,8 +13,9 @@ def jsonParser(data):
     with open('CAU_Cafeteria_Menu.json', 'w', encoding='utf-8') as file :
         json.dump(data, file, ensure_ascii=False, indent='\t')
 
-driver_dir = "./chromedriver" # 크롬드라이버 주소 설정하기
-dr = webdriver.Chrome(driver_dir)  # 크롬 드라이버를 실행하는 명령어를 dr로 지정
+chrome_driver = os.path.join('chromedriver')
+chrome_options = webdriver.ChromeOptions()
+dr = webdriver.Chrome(chrome_driver, options=chrome_options)
 dr.get('https://mportal.cau.ac.kr/main.do')
 
 # 식당 메뉴 정보 가져오는 함수
