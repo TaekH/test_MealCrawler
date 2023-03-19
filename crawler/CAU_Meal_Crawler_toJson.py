@@ -80,7 +80,7 @@ def getWeekOfMealMenu() :
         for day in range(weeklyIndex):
             setPrevDay = dr.find_element_by_css_selector('#P005 > div > div > div > div > ol > li > header > div.nb-left > div > a.nb-p-time-select-prev').click()
             setPrevDay
-    jsonParser(weeklyMenuDict)
+    return weeklyMenuDict
 
 if __name__ == "__main__":
     getWeekOfMealMenu()
