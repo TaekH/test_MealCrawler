@@ -19,6 +19,8 @@ jobs:
       with:
           python-version: '3.x'
           architecture: 'x64'
+    - name: Setup Chromedriver
+      uses: nanasess/setup-chromedriver@v1.0.1
     - name: Install dependencies
       run: |
         pip install google-cloud-core==2.3.2
