@@ -14,8 +14,10 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./crawler/hasikServiceAcountKey.js
 
 def main(request):
     cafeteria_data_dic = crawler.getWeekOfMealMenu()
+    print(cafeteria_data_dic)
     db = firestore.Client()
     doc_ref = db.collection(u'CAU_Haksik').document('CAU_Cafeteria_Menu')
+    print(doc_ref)
     doc_ref.set(cafeteria_data_dic)
 
 
