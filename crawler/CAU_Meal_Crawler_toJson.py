@@ -6,6 +6,7 @@
 import os
 from selenium import webdriver
 from selenium.webdriver import ActionChains
+from selenium.webdriver.chrome.options import Options
 import time
 import json
 
