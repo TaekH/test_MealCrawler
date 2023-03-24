@@ -1,0 +1,44 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: CAU_Meal_Crawler
+
+on:
+   schedule:
+     - cron: '*/5 * * * *' # UST 가 default. UST 22:55는 한국시간 07:55
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04 # 우분투 18.04 에서
+    strategy:
+      matrix:
+        python-version: [3.9] # 파이썬 3.7 버전으로
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install python package # 파이썬 관련 패키지를 설치하고
+      run: |        
+        pip install selenium
+        pip install requests        
+        pip install google-cloud-core==2.3.2
+        pip install google-cloud-firestore==2.10.0
+        pip install google-cloud-storage==2.7.0
+        pip install json5==0.9.6
+        pip install jsonschema==4.16.0
+        pip install ujson==5.4.0
+    
+    - name: Install ubuntu package # 우분투 관련 패키지도 설치한 후
+      run: |        
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add        
+        sudo apt-get install google-chrome-stable    
+        wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip
+        unzip ./chromedriver_linux64.zip   
+      
+    - name: Run! # send_to_weather.py 파일을 실행하시오! 
+      run: | 
+        python ./main.py
