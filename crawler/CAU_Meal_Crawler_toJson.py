@@ -80,10 +80,7 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 dr = webdriver.Chrome(chrome_driver, options=chrome_options)
-dr.implicitly_wait(3)   
+dr.implicitly_wait()
 dr.get('https://mportal.cau.ac.kr/main.do')
+dr.implicitly_wait()
 getWeekOfMealMenu()
-
-
-if __name__ == "__main__":
-    getWeekOfMealMenu()
