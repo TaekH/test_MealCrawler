@@ -14,14 +14,6 @@ def jsonParser(data):
     with open('CAU_Cafeteria_Menu.json', 'w', encoding='utf-8') as file :
         json.dump(data, file, ensure_ascii=False, indent='\t')
 
-chrome_driver = os.path.join('chromedriver')
-chrome_options = Options()
-chrome_options.add_argument('--headless')
-chrome_options.add_argument('--no-sandbox')
-chrome_options.add_argument('--disable-dev-shm-usage')
-dr = webdriver.Chrome(chrome_driver, options=chrome_options)
-dr.get('https://mportal.cau.ac.kr/main.do')
-
 # 식당 메뉴 정보 가져오는 함수
 def getMenuInfo() :
     menuInfoDict = {}
@@ -81,6 +73,17 @@ def getWeekOfMealMenu() :
             setPrevDay = dr.find_element_by_css_selector('#P005 > div > div > div > div > ol > li > header > div.nb-left > div > a.nb-p-time-select-prev').click()
             setPrevDay
     return weeklyMenuDict
+
+chrome_driver = os.path.join('chromedriver')
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
+dr = webdriver.Chrome(chrome_driver, options=chrome_options)
+dr.implicitly_wait(3)   
+dr.get('https://mportal.cau.ac.kr/main.do')
+getWeekOfMealMenu()
+
 
 if __name__ == "__main__":
     getWeekOfMealMenu()
