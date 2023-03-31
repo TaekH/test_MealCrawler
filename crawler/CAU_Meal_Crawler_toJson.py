@@ -7,6 +7,7 @@ import os
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common import By
 import time
 import json
 
@@ -19,22 +20,22 @@ def getMenuInfo() :
     menuInfoDict = {}
     for cafeteriaIndex in range(1, 10) :
         try :
-            cafeteriaName = dr.find_element_by_css_selector('#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dt').text
+            cafeteriaName = dr.find_element(By.CSS_SELECTOR, '#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dt').text
             menuInfoDict[cafeteriaName] = {}
             if cafeteriaIndex != 1 : #첫번째 식당의 경우 이미 선택되어있으므로 클릭하지 않고 넘어감
-                getcafeteria = dr.find_element_by_css_selector('#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dt > a')
+                getcafeteria = dr.find_element(By.CSS_SELECTOR, '#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dt > a')
                 getcafeteria.click()
                 time.sleep(0.5)
             for cafeteriaInfoIndex in range(2, 30) :
                 try :
-                    getcafeteriaInfo = dr.find_element_by_css_selector('#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dd:nth-child('+ str(cafeteriaInfoIndex) +')')
-                    MenuType = dr.find_element_by_css_selector('#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dd:nth-child('+ str(cafeteriaInfoIndex) +') > label > ul > li:nth-child(2) > span').text
+                    getcafeteriaInfo = dr.find_element(By.CSS_SELECTOR, '#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dd:nth-child('+ str(cafeteriaInfoIndex) +')')
+                    MenuType = dr.find_element(By.CSS_SELECTOR, '#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dd:nth-child('+ str(cafeteriaInfoIndex) +') > label > ul > li:nth-child(2) > span').text
                     menuInfoDict[cafeteriaName][MenuType] = {}
-                    menuInfoDict[cafeteriaName][MenuType]['price'] = dr.find_element_by_css_selector('#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dd:nth-child('+ str(cafeteriaInfoIndex) +') > label > ul > li:nth-child(3) > span').text
+                    menuInfoDict[cafeteriaName][MenuType]['price'] = dr.find_element(By.CSS_SELECTOR, '#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dd:nth-child('+ str(cafeteriaInfoIndex) +') > label > ul > li:nth-child(3) > span').text
                     getcafeteriaInfo.click()
                     time.sleep(0.5)
-                    getMealTime = dr.find_element_by_css_selector('#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dd:nth-child('+ str(cafeteriaInfoIndex) +') > label > div > div.nb-p-04-02 > div.nb-p-04-02-01.nb-font-12 > p.nb-p-04-02-01-b')
-                    getMealInfo = dr.find_element_by_css_selector('#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dd:nth-child('+ str(cafeteriaInfoIndex) +') > label > div > div.nb-p-04-03.nb-font-13.nb-p-flex.nb-wrap.ng-binding')
+                    getMealTime = dr.find_element(By.CSS_SELECTOR, '#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dd:nth-child('+ str(cafeteriaInfoIndex) +') > label > div > div.nb-p-04-02 > div.nb-p-04-02-01.nb-font-12 > p.nb-p-04-02-01-b')
+                    getMealInfo = dr.find_element(By.CSS_SELECTOR, '#carteP005 > li > dl:nth-child('+ str(cafeteriaIndex) +') > dd:nth-child('+ str(cafeteriaInfoIndex) +') > label > div > div.nb-p-04-03.nb-font-13.nb-p-flex.nb-wrap.ng-binding')
                     menuInfoDict[cafeteriaName][MenuType]['time'] = getMealTime.text
                     menuInfoDict[cafeteriaName][MenuType]['menu'] = getMealInfo.text.replace('\n', '|')
                 except :
@@ -47,7 +48,7 @@ def getMenuInfo() :
 def getDailyMenu() :
     dailyMenuInfoDict = {}
     for mealSchedule in range(1, 4) :
-        getMealSchedule = dr.find_element_by_css_selector('#P005 > div > div > div > div > ol > li > header > div.nb-right.nb-t-right > ol > li:nth-child('+ str(mealSchedule) +')')
+        getMealSchedule = dr.find_element(By.CSS_SELECTOR, '#P005 > div > div > div > div > ol > li > header > div.nb-right.nb-t-right > ol > li:nth-child('+ str(mealSchedule) +')')
         dailyMenuInfoDict[mealSchedule-1] = {}
         getMealSchedule.click()
         time.sleep(0.5)
@@ -61,16 +62,16 @@ def getWeekOfMealMenu() :
     for campus in range(1, 3):
         weeklyMenuDict[campus-1] = {}
         for day in range(weeklyIndex) :
-            getCampus = dr.find_element_by_css_selector('#P005 > div > div > div > div > header > div > ol > li:nth-child(' + str(campus) + ') > span')
+            getCampus = dr.find_element(By.CSS_SELECTOR, '#P005 > div > div > div > div > header > div > ol > li:nth-child(' + str(campus) + ') > span')
             getCampus.click() #setCampus 메소드
             time.sleep(0.5)
-            getDay = dr.find_element_by_css_selector('#P005 > div > div > div > div > ol > li > header > div.nb-left > div > p')
+            getDay = dr.find_element(By.CSS_SELECTOR, '#P005 > div > div > div > div > ol > li > header > div.nb-left > div > p')
             weeklyMenuDict[campus-1][getDay.text] = getDailyMenu()
             time.sleep(0.3)
-            setNextDay = dr.find_element_by_css_selector('#P005 > div > div > div > div > ol > li > header > div.nb-left > div > a.nb-p-time-select-next').click()
+            setNextDay = dr.find_element(By.CSS_SELECTOR, '#P005 > div > div > div > div > ol > li > header > div.nb-left > div > a.nb-p-time-select-next').click()
             setNextDay
         for day in range(weeklyIndex):
-            setPrevDay = dr.find_element_by_css_selector('#P005 > div > div > div > div > ol > li > header > div.nb-left > div > a.nb-p-time-select-prev').click()
+            setPrevDay = dr.find_element(By.CSS_SELECTOR, '#P005 > div > div > div > div > ol > li > header > div.nb-left > div > a.nb-p-time-select-prev').click()
             setPrevDay
     return weeklyMenuDict
 
