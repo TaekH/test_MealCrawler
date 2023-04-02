@@ -89,9 +89,10 @@ try:
     dr.get('https://mportal.cau.ac.kr/main.do')
     dr.implicitly_wait(5)
     cafeteria_data_dic = getWeekOfMealMenu()
-    db = firestore.Client()
-    doc_ref = db.collection(u'CAU_Haksik').document('CAU_Cafeteria_Menu')
-    doc_ref.set(cafeteria_data_dic)
+    jsonParser(cafeteria_data_dic)
+    #db = firestore.Client()
+    #doc_ref = db.collection(u'CAU_Haksik').document('CAU_Cafeteria_Menu')
+    #doc_ref.set(cafeteria_data_dic)
 
 except Exception as e:
     print(e)    
