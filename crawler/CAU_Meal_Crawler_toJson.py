@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
 import os
 from selenium import webdriver
 from selenium.webdriver import ActionChains
@@ -57,6 +55,15 @@ def getDailyMenu() :
 
 # 위클리 메뉴 정보 가져오는 함수
 def getWeekOfMealMenu() :
+    chrome_driver = os.path.join('chromedriver')
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    dr = webdriver.Chrome(chrome_driver, options=chrome_options)
+    dr.implicitly_wait(2)
+    dr.get('https://mportal.cau.ac.kr/main.do')
+    dr.implicitly_wait(5)
     weeklyMenuDict = {}
     weeklyIndex = 7
     for campus in range(1, 3):
@@ -73,16 +80,5 @@ def getWeekOfMealMenu() :
         for day in range(weeklyIndex):
             setPrevDay = dr.find_element(By.CSS_SELECTOR, '#P005 > div > div > div > div > ol > li > header > div.nb-left > div > a.nb-p-time-select-prev').click()
             setPrevDay
+    dr.quit()
     return weeklyMenuDict
-
-chrome_driver = os.path.join('chromedriver')
-chrome_options = Options()
-chrome_options.add_argument('--headless')
-chrome_options.add_argument('--no-sandbox')
-chrome_options.add_argument('--disable-dev-shm-usage')
-dr = webdriver.Chrome(chrome_driver, options=chrome_options)
-dr.implicitly_wait(2)
-dr.get('https://mportal.cau.ac.kr/main.do')
-dr.implicitly_wait(5)
-getWeekOfMealMenu()
-dr.quit()
