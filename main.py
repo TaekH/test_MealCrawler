@@ -75,6 +75,7 @@ def getWeekOfMealMenu() :
             setPrevDay
     
     return weeklyMenuDict
+dr = webdriver.Chrome('chromedriver')  # 크롬 드라이버를 실행하는 명령어를 dr로 지정
 
 try: 
     
@@ -85,7 +86,6 @@ try:
     
 #    dr = webdriver.Chrome(, options=chrome_options)
     driver_dir = "./chromedriver" # 크롬드라이버 주소 설정하기
-    dr = webdriver.Chrome('chromedriver')  # 크롬 드라이버를 실행하는 명령어를 dr로 지정
     dr.get('https://mportal.cau.ac.kr/main.do')
     cafeteria_data_dic = getWeekOfMealMenu()
     jsonParser(cafeteria_data_dic)
