@@ -78,18 +78,18 @@ def getWeekOfMealMenu() :
 
 try: 
     
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
+#    chrome_options = webdriver.ChromeOptions()
+#    chrome_options.add_argument('--headless')
+#    chrome_options.add_argument('--no-sandbox')
+#    chrome_options.add_argument('--disable-dev-shm-usage')
     
-    dr = webdriver.Chrome('chromedriver', options=chrome_options)
-
-    dr.implicitly_wait(2)
+#    dr = webdriver.Chrome(, options=chrome_options)
+    driver_dir = "./chromedriver" # 크롬드라이버 주소 설정하기
+    dr = webdriver.Chrome(driver_dir)  # 크롬 드라이버를 실행하는 명령어를 dr로 지정
     dr.get('https://mportal.cau.ac.kr/main.do')
-    dr.implicitly_wait(5)
     cafeteria_data_dic = getWeekOfMealMenu()
     jsonParser(cafeteria_data_dic)
+    print("adf")
     #db = firestore.Client()
     #doc_ref = db.collection(u'CAU_Haksik').document('CAU_Cafeteria_Menu')
     #doc_ref.set(cafeteria_data_dic)
