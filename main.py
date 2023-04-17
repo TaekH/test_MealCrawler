@@ -5,11 +5,11 @@ import json
 from google.cloud import firestore
 import os
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./crawler/hasikServiceAcountKey.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-
-# def jsonParser(data):
-#     with open(os.path.join(BASE_DIR, 'CAU_Cafeteria_Menu.json'), 'w+', encoding='utf-8') as f :
-#         json.dump(data, f, ensure_ascii=False, indent='\t')
+def jsonParser(data):
+    with open(os.path.join(BASE_DIR, 'CAU_Cafeteria_Menu.json'), 'w+', encoding='utf-8') as f :
+        json.dump(data, f, ensure_ascii=False, indent='\t')
 
 
 
@@ -84,7 +84,7 @@ def getWeekOfMealMenu() :
     return weeklyMenuDict
 
 def runCrawler():
-#    jsonParser(getWeekOfMealMenu())
+    jsonParser(getWeekOfMealMenu())
     print(getWeekOfMealMenu())
     print("크롤링 완료")
 
@@ -104,17 +104,16 @@ try :
     runCrawler()
 
     #Set FireStore
-    # db = firestore.Client()
-    # doc_ref = db.collection(u'CAU_Haksik').document('CAU_Cafeteria_Menu')
+    db = firestore.Client()
+    doc_ref = db.collection(u'CAU_Haksik').document('userid123')
 
-    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # try:
-    #     with open(os.path.join(BASE_DIR, './CAU_Cafeteria_Menu.json'), 'r') as f:
-    #         cafeteria_data_dic = json.load(f)
-    #     doc_ref.set(cafeteria_data_dic)
-    # except:
-    #     print("예외 발생")
-    #     runCrawler()
+    try:
+        with open(os.path.join(BASE_DIR, './CAU_Cafeteria_Menu.json'), 'r') as f:
+            cafeteria_data_dic = json.load(f)
+        doc_ref.set(cafeteria_data_dic)
+    except:
+        print("예외 발생")
+        runCrawler()
 
 except Exception as e:
     print(e)
