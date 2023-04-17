@@ -108,8 +108,8 @@ try :
         with open(os.path.join(BASE_DIR, './CAU_Cafeteria_Menu.json'), 'r') as f:
             cafeteria_data_dic = json.load(f)
         doc_ref.set(cafeteria_data_dic)
-    except:
-        print("예외 발생")
+    except Exception as e:
+        print("예외 발생 : ", e)
         runCrawler()
 
 except Exception as e:
