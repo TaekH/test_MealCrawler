@@ -59,8 +59,9 @@ def getDailyMenu() :
 # 위클리 메뉴 정보 가져오는 함수
 def getWeekOfMealMenu() :
     weeklyMenuDict = {}
-    weeklyIndex = 7
-    for campus in range(1, 3):
+    #추후 재수정해야하는 사항 - 일주일, 캠퍼스 인덱스
+    weeklyIndex = 1
+    for campus in range(1, 2):
         weeklyMenuDict[campus-1] = {}
         for day in range(weeklyIndex) :
             getCampus = dr.find_element(By.CSS_SELECTOR, '#P005 > div > div > div > div > header > div > ol > li:nth-child(' + str(campus) + ') > span')
@@ -77,7 +78,8 @@ def getWeekOfMealMenu() :
     return weeklyMenuDict
 
 def runCrawler():
-    jsonParser(getWeekOfMealMenu())
+#    jsonParser(getWeekOfMealMenu())
+    getWeekOfMealMenu()
     print("크롤링 완료")
 
 try :
