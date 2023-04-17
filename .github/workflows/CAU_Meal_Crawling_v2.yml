@@ -5,8 +5,9 @@ name: CAU_Meal_Crawler
 
 on:
    schedule:
-     - cron: '*/10 * * * *' # UST 가 default. UST 22:55는 한국시간 07:55
-   push:
+     - cron: '0 16 * * *'
+   #push, pull_request시에 동작
+   push: 
     branches: [ main ]
    pull_request:
     branches: [ main ]
@@ -16,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.9] # 파이썬 3.9 버전으로
+        python-version: [3.9]
 
     steps:
     - uses: actions/checkout@v2
@@ -27,14 +28,7 @@ jobs:
     
     - name: Install python package # 파이썬 관련 패키지를 설치하고
       run: |        
-        pip install selenium
-        pip install requests        
-        pip install google-cloud-core==2.3.2
-        pip install google-cloud-firestore==2.10.0
-        pip install google-cloud-storage==2.7.0
-        pip install json5==0.9.6
-        pip install jsonschema==4.16.0
-        pip install ujson==5.4.0
+        pip install -r requirements.txt
     
     - name: Install ubuntu package # 우분투 관련 패키지 설치 
       run: |        
