@@ -118,8 +118,8 @@ except Exception as e:
 
 finally:
     print("최신화 완료")
-    processTime = time().time() - start
+    processTime = time.time() - start
     minute = processTime / 60
-    second = processTime - start % 60
-    print("실행 시간 :", minute,"분", second,"초")
+    second = processTime % 60
+    print("실행 시간 :", minute, "분 ", second, "초")
     dr.quit()
