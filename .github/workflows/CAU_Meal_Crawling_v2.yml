@@ -5,7 +5,7 @@ name: CAU_Meal_Crawler
 
 on:
    schedule:
-     - cron: '*/60 * * * *' # UST 가 default. UST 22:55는 한국시간 07:55
+     - cron: '*/10 * * * *' # UST 가 default. UST 22:55는 한국시간 07:55
   push:
     branches: [ main ]
   pull_request:
