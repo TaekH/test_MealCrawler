@@ -6,9 +6,9 @@ name: CAU_Meal_Crawler
 on:
    schedule:
      - cron: '*/10 * * * *' # UST 가 default. UST 22:55는 한국시간 07:55
-  push:
+   push:
     branches: [ main ]
-  pull_request:
+   pull_request:
     branches: [ main ]
 
 jobs:
@@ -48,7 +48,7 @@ jobs:
     - name: Run main.py # main.py 실행
       run: | 
         python ./main.py
-   - name: Commit and Push
+    - name: Commit and Push
       run: |
         git config --local user.email "hth3396@gmail.com"
         git config --local user.name "Auto - update CrawlerData"
