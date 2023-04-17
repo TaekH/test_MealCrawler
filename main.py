@@ -6,6 +6,8 @@ from google.cloud import firestore
 import os
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./crawler/hasikServiceAcountKey.json"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# 시작 시간
+start = time.time()
 
 def jsonParser(data):
     with open(os.path.join(BASE_DIR, 'CAU_Cafeteria_Menu.json'), 'w+', encoding='utf-8') as f :
@@ -64,9 +66,8 @@ def getDailyMenu() :
 # 위클리 메뉴 정보 가져오는 함수
 def getWeekOfMealMenu() :
     weeklyMenuDict = {}
-    #추후 재수정해야하는 사항 - 일주일, 캠퍼스 인덱스
-    weeklyIndex = 1
-    for campus in range(1, 2):
+    weeklyIndex = 7
+    for campus in range(1, 3):
         weeklyMenuDict[campus-1] = {}
         for day in range(weeklyIndex) :
             getCampus = dr.find_element(By.CSS_SELECTOR, '#P005 > div > div > div > div > header > div > ol > li:nth-child(' + str(campus) + ') > span')
@@ -85,7 +86,6 @@ def getWeekOfMealMenu() :
 
 def runCrawler():
     jsonParser(getWeekOfMealMenu())
-    print(getWeekOfMealMenu())
     print("크롤링 완료")
 
 try :
@@ -121,4 +121,5 @@ except Exception as e:
 
 finally:
     print("최신화 완료")
+    print("실행 시간 :", time.time() - start)
     dr.quit()
