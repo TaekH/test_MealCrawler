@@ -48,10 +48,14 @@ jobs:
     - name: Run main.py # main.py 실행
       run: | 
         python ./main.py
-    - name: Commit and Push
+    - name: Commit
       run: |
         git config --local user.email "hth3396@gmail.com"
         git config --local user.name "Auto - update CrawlerData"
         git add CAU_Cafeteria_Menu.json
         git commit -m "Auto - Update data with Crawling" # 커밋 메세지
-        git push
+    - name: Push
+      uses: ad-m/github-push-action@main
+      with:
+        branch: 'main'
+        github_token: $ 
