@@ -5,7 +5,11 @@ name: CAU_Meal_Crawler
 
 on:
    schedule:
-     - cron: '*/15 * * * *' # UST 가 default. UST 22:55는 한국시간 07:55
+     - cron: '*/60 * * * *' # UST 가 default. UST 22:55는 한국시간 07:55
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -44,3 +48,10 @@ jobs:
     - name: Run main.py # main.py 실행
       run: | 
         python ./main.py
+   - name: Commit and Push
+      run: |
+        git config --local user.email "hth3396@gmail.com"
+        git config --local user.name "Auto - update CrawlerData"
+        git add CAU_Cafeteria_Menu.json
+        git commit -m "Auto - Update data with Crawling" # 커밋 메세지
+        git push
