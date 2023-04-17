@@ -96,17 +96,17 @@ try :
     runCrawler()
 
     #Set FireStore
-    db = firestore.Client()
-    doc_ref = db.collection(u'CAU_Haksik').document('CAU_Cafeteria_Menu')
+    # db = firestore.Client()
+    # doc_ref = db.collection(u'CAU_Haksik').document('CAU_Cafeteria_Menu')
 
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    try:
-        with open(os.path.join(BASE_DIR, './CAU_Cafeteria_Menu.json'), 'r') as f:
-            cafeteria_data_dic = json.load(f)
-        doc_ref.set(cafeteria_data_dic)
-    except:
-        print("예외 발생")
-        runCrawler()
+    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # try:
+    #     with open(os.path.join(BASE_DIR, './CAU_Cafeteria_Menu.json'), 'r') as f:
+    #         cafeteria_data_dic = json.load(f)
+    #     doc_ref.set(cafeteria_data_dic)
+    # except:
+    #     print("예외 발생")
+    #     runCrawler()
 
 except Exception as e:
     print(e)
