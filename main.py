@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+import math
 import json
 from google.cloud import firestore
 import os
@@ -121,5 +122,5 @@ finally:
     processTime = time.time() - start
     minute = processTime / 60
     second = processTime % 60
-    print("실행 시간 :", minute, "분 ", second, "초")
+    print("실행 시간 :", math.trunc(minute), "분 ", round(second), "초")
     dr.quit()
