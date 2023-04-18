@@ -103,7 +103,7 @@ try :
 
     #Set FireStore
     db = firestore.Client()
-    doc_ref = db.collection(u'CAU_Haksik').document('userid123')
+    doc_ref = db.collection(u'CAU_Haksik').document('CAU_Cafeteria_Menu')
 
     try:
         with open(os.path.join(BASE_DIR, './CAU_Cafeteria_Menu.json'), 'r') as f:
