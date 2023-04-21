@@ -43,7 +43,7 @@ jobs:
       id: create-json
       uses: jsdaniell/create-json@v1.2.2
       with:
-        name: "hasikServiceAcountKey.json"
+        name: "hasikServiceAccountKey.json"
         json: ${{ secrets.FIREBASE_SERVICEACCOUNTKEY }}
       
     - name: Run main.py # main.py 실행
