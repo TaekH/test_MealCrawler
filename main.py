@@ -54,7 +54,7 @@ def getMenuInfo(mealSchedule) :
 # 데일리 메뉴 정보 가져오는 함수
 def getDailyMenu() :
     dailyMenuInfoDict = {}
-    for mealSchedule in range(1, 3) :
+    for mealSchedule in range(1, 2) :
         getMealSchedule = dr.find_element(By.CSS_SELECTOR, '#P005 > div > div > div > div > ol > li > header > div.nb-right.nb-t-right > ol > li:nth-child('+ str(mealSchedule) +')')
         dailyMenuInfoDict[mealSchedule-1] = {}
         getMealSchedule.click()
