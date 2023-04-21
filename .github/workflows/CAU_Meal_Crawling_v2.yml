@@ -41,7 +41,7 @@ jobs:
         
     - name: Add FireBaseAccountKey # FireBaseAccountKey 생성
       run: |
-        echo ${{ secrets.FIREBASE_SERVICESACCOUNTKEY }} >> hasikServiceAccountKey.json
+        echo "${{ secrets.FIREBASE_SERVICESACCOUNTKEY }}" >> hasikServiceAccountKey.json
     - run: cat hasikServiceAccountKey.json
       
     - name: Run main.py # main.py 실행
