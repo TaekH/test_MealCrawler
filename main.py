@@ -5,7 +5,7 @@ import math
 import json
 from google.cloud import firestore
 import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./crawler/hasikServiceAcountKey.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./hasikServiceAcountKey.json"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # 시작 시간
 start = time.time()
